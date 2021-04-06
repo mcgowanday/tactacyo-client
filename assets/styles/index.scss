@@ -1,1 +1,40 @@
 @import '~bootstrap/scss/bootstrap';
+
+$alt-color: $cyan;
+$body-bg-color: $gray-200;
+$font-color: $black;
+
+body {
+  background-color: $body-bg-color;
+}
+#game-board {
+height: 100vh;
+}
+
+.board {
+margin: auto;
+max-height: calc(100vh - 75px);
+max-width: calc(100vh - 100px);
+}
+
+.box {
+  align-items: center;
+  background-color: $secondary;
+  border: 2.5px solid $white;
+  color: $font-color;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  // min-height: calc(100% / 3);
+  &:hover {
+    background-color: rgba(255,255,0,0.5);
+  }
+}
+
+.alt-color {
+  background-color: $alt-color;
+}
+
+// div:hover {
+// background-color: rgba(255,255,0,0.5);
+// }
