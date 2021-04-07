@@ -73,7 +73,7 @@ const onGameSuccess = function (event) {
   // const boxe = ['#1' + value]
   // const box = $('#8').text() ['#0.value']
   // const box = $('#8').text()
-  event.preventDefault()
+  // event.preventDefault()
   if ($('#2').text() === 'x' && $('#1').text() === 'x' && $('#0').text() === 'x') {
   // ($('#1').text() === 'x')
     $('#message').text('     !~!~!~!~!~!~!~!~!~!~!~!~!~!~!  PLAYER X WINS  !~!~!~!~!~!~!~!~!~!~!~!~!~!~!')
