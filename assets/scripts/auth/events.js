@@ -44,18 +44,6 @@ const onNewGame = function (event) {
     .then(ui.onNewGameSuccess)
     .catch(ui.onNewGameFailure)
 }
-// let currentPlayer = 'x'
-// const onBoxClick = function (event) {
-//   event.preventDefault()
-//   const cell = event.target.id
-//   // const cellText = cell.text()
-//   console.log('you clicked!')
-//   $('#' + cell).append(currentPlayer)
-//   if (currentPlayer === 'x') {
-//     currentPlayer = 'o'
-//   } else if (currentPlayer === 'o') {
-//     currentPlayer = 'x'
-//   }
 let currentPlayer = 'x'
 const onBoxClick = function (event) {
   event.preventDefault()
@@ -65,28 +53,42 @@ const onBoxClick = function (event) {
   const boxText = $(event.target).text()
   if (boxText === 'x' || boxText === 'o') {
     $('#message').text('This space is taken!')
+    // $('#message').delay(5000).text('')
     // $('#message').delay(800).text('Try again.')
   } else {
-    $('#' + box).append(currentPlayer)
+    $('#' + box).text(currentPlayer)
     $('#message').text('Move logged!')
     if (currentPlayer === 'x') {
       currentPlayer = 'o'
     } else if (currentPlayer === 'o') {
       currentPlayer = 'x'
     }
-    // api.boxClick(data)
+    // api.boxClick(data/cell)
     //   .then(ui.onBoxClickSuccess)
     //   .catch(ui.onBoxClickFailure)
   }
-  // const cell = event.target.index
-  // api.boxClick(cell)
-  //   .then(ui.onBoxClickSuccess)
-  //   .catch(ui.onBoxClickFailure)
 }
+const onGameSuccess = function (event) {
+  // const value = $('div.box').text()
+  // const boxe = ['#1' + value]
+  // const box = $('#8').text() ['#0.value']
+  // const box = $('#8').text()
+  event.preventDefault()
+  if ($('#2').text() === 'x' && $('#1').text() === 'x' && $('#0').text() === 'x') {
+  // ($('#1').text() === 'x')
+    $('#message').text('     !~!~!~!~!~!~!~!~!~!~!~!~!~!~!  PLAYER X WINS  !~!~!~!~!~!~!~!~!~!~!~!~!~!~!')
+  } else if ($('#2').text() === 'o' && $('#1').text() === 'o' && $('#0').text() === 'o') {
+    $('#message').text('PLAYER O WINS!')
+  } else {
+    console.log('game success = false')
+  }
+}
+
 module.exports = {
   onSignUp,
   onSignIn,
   onSignOut,
   onNewGame,
-  onBoxClick
+  onBoxClick,
+  onGameSuccess
 }
