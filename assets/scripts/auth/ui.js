@@ -28,7 +28,8 @@ const onSignOutSuccess = function (response) {
   $('#sign-in').show()
   $('#sign-up').show()
   $('#game-board').hide()
-  $('#message').delay(1000).fadeOut()
+  $('#new-game').hide()
+  // $('#message').delay(1000).fadeOut()
   // $('form').trigger('reset')
 }
 const onNewGameSuccess = function (response) {

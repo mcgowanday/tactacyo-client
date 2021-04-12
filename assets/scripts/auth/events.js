@@ -2,6 +2,7 @@
 const getFormFields = require('./../../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
+const logic = require('./../game/logic')
 
 const onSignUp = function (event) {
   event.preventDefault()
@@ -45,13 +46,19 @@ const onNewGame = function (event) {
     .catch(ui.onNewGameFailure)
 }
 let currentPlayer = 'x'
+// let gameOver = logic.success
 const onBoxClick = function (event) {
   event.preventDefault()
+  // console.log(logic.onGameSuccess)
   // const form = event.target
   // const data = getFormFields(form)
   const box = event.target.id
   const boxText = $(event.target).text()
-  if (boxText === 'x' || boxText === 'o') {
+  // console.log(logic.success)
+  if ($('#message').text() === 'PLAYER O WINS!' || $('#message').text() === 'PLAYER X WINS!') {
+    console.log('game over')
+    $('#message').text('The game is over!')
+  } else if (boxText === 'x' || boxText === 'o') {
     $('#message').text('This space is taken!')
     // $('#message').delay(5000).text('')
     // $('#message').delay(800).text('Try again.')
@@ -68,27 +75,11 @@ const onBoxClick = function (event) {
     //   .catch(ui.onBoxClickFailure)
   }
 }
-const onGameSuccess = function (event) {
-  // const value = $('div.box').text()
-  // const boxe = ['#1' + value]
-  // const box = $('#8').text() ['#0.value']
-  // const box = $('#8').text()
-  // event.preventDefault()
-  if ($('#2').text() === 'x' && $('#1').text() === 'x' && $('#0').text() === 'x') {
-  // ($('#1').text() === 'x')
-    $('#message').text('     !~!~!~!~!~!~!~!~!~!~!~!~!~!~!  PLAYER X WINS  !~!~!~!~!~!~!~!~!~!~!~!~!~!~!')
-  } else if ($('#2').text() === 'o' && $('#1').text() === 'o' && $('#0').text() === 'o') {
-    $('#message').text('PLAYER O WINS!')
-  } else {
-    console.log('game success = false')
-  }
-}
 
 module.exports = {
   onSignUp,
   onSignIn,
   onSignOut,
   onNewGame,
-  onBoxClick,
-  onGameSuccess
+  onBoxClick
 }
