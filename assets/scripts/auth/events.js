@@ -43,64 +43,16 @@ const onNewGame = function (event) {
   event.preventDefault()
   const id = event.target
   const data = getFormFields(id)
+  // resets success = true to success = false for a fresh game
+  success = false
+  // resets turnNumber counter on new game to check for ties
+  turnNumber = 0
   console.log(data)
   api.newGame(data)
     .then(ui.onNewGameSuccess)
     .catch(ui.onNewGameFailure)
+    console.log(success)
 }
-// const onGameSuccess = function (event) {
-//   if ($('#0').text() === 'x' && $('#1').text() === 'x' && $('#2').text() === 'x') {
-//     $('#message').text('!~!~!~!~!~!~!~!~!~!~!~!~!~!~!  PLAYER X WINS  !~!~!~!~!~!~!~!~!~!~!~!~!~!~!')
-//     success = true
-//   } else if ($('#0').text() === 'o' && $('#1').text() === 'o' && $('#2').text() === 'o') {
-//     $('#message').text('PLAYER O WINS!')
-//     success = true
-//   } else if ($('#3').text() === 'x' && $('#4').text() === 'x' && $('#5').text() === 'x') {
-//     $('#message').text('PLAYER X WINS!')
-//     success = true
-//   } else if ($('#3').text() === 'o' && $('#4').text() === 'o' && $('#5').text() === 'o') {
-//     $('#message').text('PLAYER O WINS!')
-//     success = true
-//   } else if ($('#6').text() === 'x' && $('#7').text() === 'x' && $('#8').text() === 'x') {
-//     $('#message').text('PLAYER X WINS!')
-//     success = true
-//   } else if ($('#6').text() === 'o' && $('#7').text() === 'o' && $('#8').text() === 'o') {
-//     $('#message').text('PLAYER O WINS!')
-//     success = true
-//   } else if ($('#0').text() === 'x' && $('#3').text() === 'x' && $('#6').text() === 'x') {
-//     $('#message').text('PLAYER X WINS!')
-//     success = true
-//   } else if ($('#0').text() === 'o' && $('#3').text() === 'o' && $('#6').text() === 'o') {
-//     $('#message').text('PLAYER O WINS!')
-//     success = true
-//   } else if ($('#1').text() === 'x' && $('#4').text() === 'x' && $('#7').text() === 'x') {
-//     $('#message').text('PLAYER X WINS!')
-//     success = true
-//   } else if ($('#1').text() === 'o' && $('#4').text() === 'o' && $('#7').text() === 'o') {
-//     $('#message').text('PLAYER O WINS!')
-//     success = true
-//   } else if ($('#2').text() === 'x' && $('#5').text() === 'x' && $('#8').text() === 'x') {
-//     $('#message').text('PLAYER X WINS!')
-//     success = true
-//   } else if ($('#2').text() === 'o' && $('#5').text() === 'o' && $('#8').text() === 'o') {
-//     $('#message').text('PLAYER O WINS!')
-//     success = true
-//   } else if ($('#0').text() === 'x' && $('#4').text() === 'x' && $('#8').text() === 'x') {
-//     $('#message').text('PLAYER X WINS!')
-//     success = true
-//   } else if ($('#0').text() === 'o' && $('#4').text() === 'o' && $('#8').text() === 'o') {
-//     $('#message').text('PLAYER O WINS!')
-//     success = true
-//     // number of turns start with 0 ends with 9
-//   } else {
-//     success = false
-//     // this does not work
-//     console.log('not over yet')
-//     // or message of who is next
-//   }
-//   console.log(success)
-// }
-// let gameOver = logic.success
 const onBoxClick = function (event) {
   event.preventDefault()
   // console.log(logic.onGameSuccess)
@@ -118,9 +70,10 @@ const onBoxClick = function (event) {
 
   // console.log(logic.success)
   // $('#message').text() === 'PLAYER O WINS!' || $('#message').text() === 'PLAYER X WINS!'
-  if (success === true) {
+  if (success === true || turnNumber === 9) {
     console.log('game over')
     $('#message').text('The game is over!')
+    // success = false
   } else if (boxText === 'x' || boxText === 'o') {
     $('#message').text('This space is taken!')
     // $('#message').delay(5000).text('')
@@ -135,60 +88,60 @@ const onBoxClick = function (event) {
     } else if (currentPlayer === 'o') {
       currentPlayer = 'x'
     } if ($('#0').text() === 'x' && $('#1').text() === 'x' && $('#2').text() === 'x') {
-      $('#message').text('!~!~!~!~!~!~!~!~!~!~!~!~!~!~!  PLAYER X WINS  !~!~!~!~!~!~!~!~!~!~!~!~!~!~!')
+      $('#message2').text('!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!  PLAYER X WINS  ~!~!~!~!~!~!~!~!x!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!')
       success = true
     } else if ($('#0').text() === 'o' && $('#1').text() === 'o' && $('#2').text() === 'o') {
-      $('#message').text('PLAYER O WINS!')
+      $('#message2').text('PLAYER O WINS!')
       success = true
     } else if ($('#3').text() === 'x' && $('#4').text() === 'x' && $('#5').text() === 'x') {
-      $('#message').text('PLAYER X WINS!')
+      $('#message2').text('!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!  PLAYER X WINS  !~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!')
       success = true
     } else if ($('#3').text() === 'o' && $('#4').text() === 'o' && $('#5').text() === 'o') {
-      $('#message').text('PLAYER O WINS!')
+      $('#message2').text('PLAYER O WINS!')
       success = true
     } else if ($('#6').text() === 'x' && $('#7').text() === 'x' && $('#8').text() === 'x') {
-      $('#message').text('PLAYER X WINS!')
+      $('#message2').text('!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!  PLAYER X WINS  !~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!')
       success = true
     } else if ($('#6').text() === 'o' && $('#7').text() === 'o' && $('#8').text() === 'o') {
-      $('#message').text('PLAYER O WINS!')
+      $('#message2').text('PLAYER O WINS!')
       success = true
     } else if ($('#0').text() === 'x' && $('#3').text() === 'x' && $('#6').text() === 'x') {
-      $('#message').text('PLAYER X WINS!')
+      $('#message2').text('!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!  PLAYER X WINS  !~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!')
       success = true
     } else if ($('#0').text() === 'o' && $('#3').text() === 'o' && $('#6').text() === 'o') {
-      $('#message').text('PLAYER O WINS!')
+      $('#message2').text('PLAYER O WINS!')
       success = true
     } else if ($('#1').text() === 'x' && $('#4').text() === 'x' && $('#7').text() === 'x') {
-      $('#message').text('PLAYER X WINS!')
+      $('#message2').text('!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!  PLAYER X WINS  !~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!')
       success = true
     } else if ($('#1').text() === 'o' && $('#4').text() === 'o' && $('#7').text() === 'o') {
-      $('#message').text('PLAYER O WINS!')
+      $('#message2').text('PLAYER O WINS!')
       success = true
     } else if ($('#2').text() === 'x' && $('#5').text() === 'x' && $('#8').text() === 'x') {
-      $('#message').text('PLAYER X WINS!')
+      $('#message2').text('!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!  PLAYER X WINS  !~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!')
       success = true
     } else if ($('#2').text() === 'o' && $('#5').text() === 'o' && $('#8').text() === 'o') {
-      $('#message').text('PLAYER O WINS!')
+      $('#message2').text('PLAYER O WINS!')
       success = true
     } else if ($('#0').text() === 'x' && $('#4').text() === 'x' && $('#8').text() === 'x') {
-      $('#message').text('PLAYER X WINS!')
+      $('#message2').text('!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!  PLAYER X WINS  !~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!')
       success = true
     } else if ($('#0').text() === 'o' && $('#4').text() === 'o' && $('#8').text() === 'o') {
-      $('#message').text('PLAYER O WINS!')
+      $('#message2').text('PLAYER O WINS!')
       success = true
     } else if ($('#2').text() === 'x' && $('#4').text() === 'x' && $('#6').text() === 'x') {
-      $('#message').text('PLAYER X WINS!')
+      $('#message2').text('!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!  PLAYER X WINS  !~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!')
       success = true
     } else if ($('#2').text() === 'o' && $('#4').text() === 'o' && $('#6').text() === 'o') {
-      $('#message').text('PLAYER O WINS!')
+      $('#message2').text('PLAYER O WINS!')
       success = true
       // number of turns start with 0 ends with 9
     } else if (turnNumber === 9) {
-      $('#message').text('TIE GAME!')
+      $('#message2').text('YOU TIED, YO!')
       console.log('not over yet')
       // or message of who is next
-      console.log(success)
     }
+    console.log(success)
   }
   // run on game success - check for winner
 
