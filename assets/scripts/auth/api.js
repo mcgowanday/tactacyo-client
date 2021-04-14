@@ -32,10 +32,28 @@ const newGame = function (data) {
     url: config.apiUrl + '/games',
     headers: {
       Authorization: 'Bearer ' + store.user.token
-    }
+    },
+    data: data
   })
 }
-const boxClick = function (data) {
+const boxClick = function (index, value, gameOver) {
+  console.log(index, value, gameOver)
+  return $.ajax({
+    method: 'PATCH',
+    url: config.apiUrl + '/games/' + store.game._id,
+    headers: {
+      Authorization: 'Bearer ' + store.user.token
+    },
+    data: {
+      game: {
+        cell: {
+          index: index,
+          value: value
+        }
+      },
+      over: gameOver
+    }
+  })
 }
 
 // const boxClick = function () {

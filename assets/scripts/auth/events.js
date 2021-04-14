@@ -47,47 +47,43 @@ const onNewGame = function (event) {
   success = false
   // resets turnNumber counter on new game to check for ties
   turnNumber = 0
+  console.log(id)
   console.log(data)
   api.newGame(data)
     .then(ui.onNewGameSuccess)
     .catch(ui.onNewGameFailure)
-    console.log(success)
+  console.log(success)
 }
 const onBoxClick = function (event) {
   event.preventDefault()
-  // console.log(logic.onGameSuccess)
-  // const form = event.target
-  // const data = getFormFields(form)
+  // const cell = event.target.innerHTML
+  // console.log(event.target)
+  // console.log(cell)
   const box = event.target.id
   const boxText = $(event.target).text()
-  // function checkForTurn() {
-  // let i = 0
-  // for (i = 0; i < 9; i++) {
-  //   // turnNumber = turnNumber + 1
-  //   turnNumber = i
-  //  console.log(turnNumber)
-  // }
-
-  // console.log(logic.success)
+  console.log(boxText)
+  if (success) return
   // $('#message').text() === 'PLAYER O WINS!' || $('#message').text() === 'PLAYER X WINS!'
   if (success === true || turnNumber === 9) {
     console.log('game over')
     $('#message').text('The game is over!')
-    // success = false
   } else if (boxText === 'x' || boxText === 'o') {
     $('#message').text('This space is taken!')
-    // $('#message').delay(5000).text('')
     // $('#message').delay(800).text('Try again.')
   } else {
     $('#' + box).text(currentPlayer)
-    $('#message').text('Move logged!')
+    $('#message').text('Move logged!!!')
+    // const cellIndex = $("data-cell-index").data
+
     turnNumber = turnNumber + 1
     console.log(turnNumber)
     if (currentPlayer === 'x') {
       currentPlayer = 'o'
     } else if (currentPlayer === 'o') {
       currentPlayer = 'x'
-    } if ($('#0').text() === 'x' && $('#1').text() === 'x' && $('#2').text() === 'x') {
+    }
+
+    if ($('#0').text() === 'x' && $('#1').text() === 'x' && $('#2').text() === 'x') {
       $('#message2').text('!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!  PLAYER X WINS  ~!~!~!~!~!~!~!~!x!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!')
       success = true
     } else if ($('#0').text() === 'o' && $('#1').text() === 'o' && $('#2').text() === 'o') {
@@ -138,16 +134,17 @@ const onBoxClick = function (event) {
       // number of turns start with 0 ends with 9
     } else if (turnNumber === 9) {
       $('#message2').text('YOU TIED, YO!')
+      success = true
       console.log('not over yet')
       // or message of who is next
     }
     console.log(success)
   }
   // run on game success - check for winner
-
-  // api.boxClick(data/cell)
-  //   .then(ui.onBoxClickSuccess)
-  //   .catch(ui.onBoxClickFailure)
+  // console.log(boxText)
+  api.boxClick(box, currentPlayer, success)
+    .then(ui.onBoxClickSuccess)
+    .catch(ui.onBoxClickFailure)
 }
 
 module.exports = {

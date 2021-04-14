@@ -16,7 +16,9 @@ const onSignInSuccess = function (response) {
   $('#sign-in').hide()
   $('#new-game').show()
   $('#sign-out').show()
+  console.log(response)
   console.log(store.user)
+  console.log(response.user)
 }
 const onSignInFailure = function () {
   $('#message').text('Sign in failed!')
@@ -34,6 +36,7 @@ const onSignOutSuccess = function (response) {
   // $('form').trigger('reset')
 }
 const onNewGameSuccess = function (response) {
+  console.log(response)
   // resetting box text to empty string
   $('.box').text('')
   // resetting Game outcome message text to empty string
