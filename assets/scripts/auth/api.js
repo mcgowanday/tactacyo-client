@@ -49,9 +49,9 @@ const boxClick = function (index, value, gameOver) {
         cell: {
           index: index,
           value: value
-        }
-      },
-      over: gameOver
+        },
+        over: gameOver
+      }
     }
   })
 }

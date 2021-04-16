@@ -2,9 +2,8 @@
 const getFormFields = require('./../../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
-const logic = require('./../game/logic')
 let currentPlayer = 'x'
-let success = false
+let success
 let turnNumber = 0
 
 const onSignUp = function (event) {
@@ -61,7 +60,7 @@ const onBoxClick = function (event) {
   // console.log(cell)
   const box = event.target.id
   const boxText = $(event.target).text()
-  console.log(boxText)
+  // console.log(boxText)
   if (success) return
   // $('#message').text() === 'PLAYER O WINS!' || $('#message').text() === 'PLAYER X WINS!'
   if (success === true || turnNumber === 9) {
@@ -72,16 +71,16 @@ const onBoxClick = function (event) {
     // $('#message').delay(800).text('Try again.')
   } else {
     $('#' + box).text(currentPlayer)
-    $('#message').text('Move logged!!!')
+    $('#message').text('Move logged!!!!!!!!!')
     // const cellIndex = $("data-cell-index").data
 
     turnNumber = turnNumber + 1
     console.log(turnNumber)
-    if (currentPlayer === 'x') {
-      currentPlayer = 'o'
-    } else if (currentPlayer === 'o') {
-      currentPlayer = 'x'
-    }
+    // if (currentPlayer === 'x') {
+    //   currentPlayer = 'o'
+    // } else if (currentPlayer === 'o') {
+    //   currentPlayer = 'x'
+    // }
 
     if ($('#0').text() === 'x' && $('#1').text() === 'x' && $('#2').text() === 'x') {
       $('#message2').text('!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!  PLAYER X WINS  ~!~!~!~!~!~!~!~!x!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!')
@@ -138,13 +137,20 @@ const onBoxClick = function (event) {
       console.log('not over yet')
       // or message of who is next
     }
-    console.log(success)
   }
+  console.log(success)
+
   // run on game success - check for winner
   // console.log(boxText)
   api.boxClick(box, currentPlayer, success)
     .then(ui.onBoxClickSuccess)
     .catch(ui.onBoxClickFailure)
+
+  if (currentPlayer === 'x') {
+    currentPlayer = 'o'
+  } else if (currentPlayer === 'o') {
+    currentPlayer = 'x'
+  }
 }
 
 module.exports = {

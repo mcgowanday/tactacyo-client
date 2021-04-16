@@ -1,6 +1,5 @@
 'use strict'
 const store = require('./../store')
-const events = require('./events')
 const onSignUpSuccess = function () {
   $('#message').text('Signed up successfully')
   $('#sign-up').trigger('reset')
@@ -51,9 +50,10 @@ const onNewGameFailure = function () {
 }
 const onBoxClickSuccess = function (response) {
   store.game = response.game
-  $('#message').text('Move logged')
+  // $('#message').text('Move logged')
   $('.box').trigger('reset')
-  console.log(store.game)
+  // console.log(store.game)
+  console.log(response)
 }
 const onBoxClickFailure = function (response) {
   $('#message').text('Click did not register!')
