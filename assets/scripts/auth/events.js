@@ -61,7 +61,7 @@ const onBoxClick = function (event) {
   const box = event.target.id
   const boxText = $(event.target).text()
   // console.log(boxText)
-  if (success) return
+  // if (success) return
   // $('#message').text() === 'PLAYER O WINS!' || $('#message').text() === 'PLAYER X WINS!'
   if (success === true || turnNumber === 9) {
     console.log('game over')
@@ -71,7 +71,7 @@ const onBoxClick = function (event) {
     // $('#message').delay(800).text('Try again.')
   } else {
     $('#' + box).text(currentPlayer)
-    $('#message').text('Move logged!!!!!!!!!')
+    $('#message').text('Move logged!!')
     // const cellIndex = $("data-cell-index").data
 
     turnNumber = turnNumber + 1
