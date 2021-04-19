@@ -32,6 +32,10 @@ body {
 height: 100vh;
 }
 
+#message2 {
+  font-weight: bold;
+}
+
 .board {
 margin: auto;
 max-height: calc(100vh - 75px);

@@ -55,14 +55,8 @@ const onNewGame = function (event) {
 }
 const onBoxClick = function (event) {
   event.preventDefault()
-  // const cell = event.target.innerHTML
-  // console.log(event.target)
-  // console.log(cell)
   const box = event.target.id
   const boxText = $(event.target).text()
-  // console.log(boxText)
-  // if (success) return
-  // $('#message').text() === 'PLAYER O WINS!' || $('#message').text() === 'PLAYER X WINS!'
   if (success === true || turnNumber === 9) {
     console.log('game over')
     $('#message').text('The game is over!')
@@ -76,11 +70,6 @@ const onBoxClick = function (event) {
 
     turnNumber = turnNumber + 1
     console.log(turnNumber)
-    // if (currentPlayer === 'x') {
-    //   currentPlayer = 'o'
-    // } else if (currentPlayer === 'o') {
-    //   currentPlayer = 'x'
-    // }
 
     if ($('#0').text() === 'x' && $('#1').text() === 'x' && $('#2').text() === 'x') {
       $('#message2').text('!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!  PLAYER X WINS  ~!~!~!~!~!~!~!~!x!~!~!~!~x~!~!~!~!~!~!~!~x~!~!~!~!')
@@ -134,14 +123,9 @@ const onBoxClick = function (event) {
     } else if (turnNumber === 9) {
       $('#message2').text('YOU TIED, YO!')
       success = true
-      console.log('not over yet')
-      // or message of who is next
     }
   }
-  console.log(success)
 
-  // run on game success - check for winner
-  // console.log(boxText)
   api.boxClick(box, currentPlayer, success)
     .then(ui.onBoxClickSuccess)
     .catch(ui.onBoxClickFailure)
